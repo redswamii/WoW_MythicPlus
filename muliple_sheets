@@ -1,0 +1,23 @@
+import pandas as pd
+
+# read the Excel file
+excel_file = pd.ExcelFile('C:/Users/brand/Downloads/book1.xlsx')
+
+# create an empty list to hold the strings
+sheet_strings = []
+
+# loop over each sheet name
+for sheet_name in excel_file.sheet_names:
+    # read the sheet into a dataframe
+    df = pd.read_excel(excel_file, sheet_name=sheet_name)
+    # convert the dataframe to a string
+    sheet_string = df.to_string()
+    # add the string to the list
+    sheet_strings.append(sheet_string)
+
+# concatenate the strings
+all_sheets_string = '\n\n'.join(sheet_strings)
+
+# write the concatenated string to a file
+with open('file.txt', 'w') as f:
+    f.write(all_sheets_string)
