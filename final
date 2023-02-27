@@ -1,0 +1,19 @@
+import pandas as pd
+
+# create an ExcelFile object
+excel_file = pd.ExcelFile('C:/Users/brand/Downloads/book1.xlsx')
+
+# get a list of sheet names
+sheet_names = excel_file.sheet_names
+
+# loop over each sheet name
+for sheet_name in sheet_names:
+    # read the sheet data into a DataFrame
+    df = pd.read_excel(excel_file, sheet_name=sheet_name)
+
+    # convert DataFrame to a string
+    df_string = df.to_string()
+
+    # write the string to a text file with the sheet name as the filename
+    with open(f'{sheet_name}.txt', 'w') as f:
+        f.write(df_string)
